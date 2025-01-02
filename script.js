@@ -10,6 +10,8 @@ const stopButton = document.getElementById("stopBtn");
 const pauseButton = document.getElementById("pauseBtn");
 const resetButton = document.getElementById("resetBtn");
 
+const lapListLabel = document.getElementById("laplist");
+
 
 let minutes =0;
 let seconds =0;
@@ -34,6 +36,7 @@ function stopTimer(){
     // interval = clearInterval(updateTimer);
     clearInterval(interval);
     interval= null;
+    addToLap();
     minutes = 0;
     seconds = 0;
     milliseconds= 0;
@@ -82,4 +85,14 @@ function displayTimer(){
     
     if(minutes < 10) minutesLabel.textContent = "0" + minutes;
     else minutesLabel.textContent = minutes;
+}
+
+function addToLap(){
+    
+    const lapTime= `${minutes}:${seconds}:${milliseconds}`;
+
+    const listItem = document.createElement("li");
+    listItem.innerHTML =`<span> ${lapListLabel.childElementCount + 1}: </span>${lapTime}`;
+
+    lapListLabel.appendChild(listItem);
 }
